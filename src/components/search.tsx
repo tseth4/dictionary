@@ -1,6 +1,7 @@
-"use client";
-import { useEffect, useState } from "react";
+// "use client";
+// import { useEffect, useState } from "react";
 import styles from "@/components/search.module.scss";
+import Image from "next/image";
 
 export default function SearchBar() {
   // const [myBool, setMyBool] = useState(false);
@@ -12,5 +13,17 @@ export default function SearchBar() {
   // } else {
   //   return <div>myBool is false</div>;
   // }
-  return <div className={styles.container}>search bar</div>;
+  return (
+    <div className={styles.container}>
+      <input type="text" alt="search" />
+      <i>
+        <Image
+          src="/images/icon-search.svg"
+          height={15}
+          width={15}
+          alt="icon-search"
+        />
+      </i>
+    </div>
+  );
 }
