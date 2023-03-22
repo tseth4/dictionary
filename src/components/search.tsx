@@ -2,22 +2,35 @@
 // import { useEffect, useState } from "react";
 import styles from "@/components/search.module.scss";
 import Image from "next/image";
+// import { useEffect } from "react";
 
-export default function SearchBar() {
-  // const [myBool, setMyBool] = useState(false);
-  // useEffect(() => {
-  //   setMyBool(true);
-  // }, []);
-  // if (myBool) {
-  //   return <div>myBool is true</div>;
-  // } else {
-  //   return <div>myBool is false</div>;
-  // }
+interface SearchBarProps {
+  currentType: string;
+  onChangeQuery: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSearch: () => void;
+}
+
+export default function SearchBar(props: SearchBarProps) {
+  const { currentType, onChangeQuery, handleSearch } = props;
+
+  const inputClass =
+    currentType === "sansserif"
+      ? `${styles.container__sanserif}`
+      : currentType === "serif"
+      ? `${styles.container__serif}`
+      : `${styles.container__mono}`;
+
   return (
     <div className={styles.container}>
-      <input type="text" alt="search" />
+      <input
+        className={inputClass}
+        type="text"
+        alt="search"
+        onChange={onChangeQuery}
+      />
       <i>
         <Image
+          onClick={() => handleSearch()}
           src="/images/icon-search.svg"
           height={15}
           width={15}

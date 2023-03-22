@@ -10,8 +10,18 @@
     border-radius: 16px;
     padding: 0.9em 1.5em;
     color: var(--color-text-primary);
-    // &:focus {
-    // }
+  }
+  &__serif {
+    font-family: Lora;
+    font-weight: bold;
+  }
+  &__sansserif {
+    font-family: Inter;
+    font-weight: bold;
+  }
+  &__mono {
+    font-family: Inconsolata;
+    font-weight: bold;
   }
 
   i {

@@ -9,6 +9,11 @@ import Image from "next/image";
 
 export default function Home() {
   const [activeTheme, setActiveTheme] = useState("light");
+  const [query, setQuery] = useState("");
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const inactiveTheme = activeTheme === "light" ? "dark" : "light";
 
   useEffect(() => {
@@ -20,7 +25,6 @@ export default function Home() {
       ? `${styles.header__theme_circle} ${styles.header__theme_circle__light}`
       : `${styles.header__theme_circle} ${styles.header__theme_circle__dark}`;
 
-  // const [todos, setTodos] = useState([]);
   const [dropdownOpen, setdropdownOpen] = useState(false);
   const [currentType, setCurrentType] = useState("sansserif");
 
@@ -35,9 +39,32 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    console.log("current type: ", currentType);
-  }, [currentType]);
+  const onChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
+
+  const handleSearch = () => {
+    // console.log("handleSearch");
+    if (query.length > 1) {
+      setError(null);
+      setLoading(true);
+      fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${query}`)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`HttpError: ${res.status} ${res.statusText}`);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setData(data);
+          setLoading(false);
+        })
+        .catch((e) => setError(e.message));
+    }
+  };
+  // useEffect(() => {
+  //   console.log("err: ", typeof error);
+  // }, [error]);
 
   return (
     <main className={styles.main}>
@@ -68,19 +95,19 @@ export default function Home() {
                   <ul className={styles.header__type__dropdown}>
                     <li
                       onClick={() => setCurrentType("sansserif")}
-                      className={styles.header__type__dropdown_sansserif}
+                      className={styles.header__type__dropdown__sansserif}
                     >
                       Sans Serif
                     </li>
                     <li
                       onClick={() => setCurrentType("serif")}
-                      className={styles.header__type__dropdown_serif}
+                      className={styles.header__type__dropdown__serif}
                     >
                       Serif
                     </li>
                     <li
                       onClick={() => setCurrentType("mono")}
-                      className={styles.header__type__dropdown_mono}
+                      className={styles.header__type__dropdown__mono}
                     >
                       Mono
                     </li>
@@ -130,8 +157,17 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <Search />
-        <Result />
+        <Search
+          currentType={currentType}
+          onChangeQuery={onChangeQuery}
+          handleSearch={handleSearch}
+        />
+        <Result
+          currentType={currentType}
+          isLoading={isLoading}
+          data={data}
+          error={error}
+        />
       </Card>
     </main>
   );
