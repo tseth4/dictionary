@@ -12,6 +12,41 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Inconsolata";
+  src: url('../../public/fonts/inconsolata/static/inconsolata-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Inconsolata";
+  src: url('../../public/fonts/inconsolata/static/inconsolata-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lora";
+  src: url('../../public/fonts/lora/static/Lora-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lora";
+  src: url('../../public/fonts/lora/static/Lora-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lora";
+  src: url('../../public/fonts/lora/static/Lora-BoldItalic.ttf');
+  font-weight: bold;
+  font-style: italic;
+}
+
 
 :root {
   --mobile-card-width: 87%;

@@ -10,9 +10,11 @@ import Image from "next/image";
 export default function Home() {
   const [activeTheme, setActiveTheme] = useState("light");
   const inactiveTheme = activeTheme === "light" ? "dark" : "light";
+
   useEffect(() => {
     document.body.dataset.theme = activeTheme;
   }, [activeTheme]);
+
   const switchClass =
     activeTheme === "light"
       ? `${styles.header__theme_circle} ${styles.header__theme_circle__light}`
@@ -20,6 +22,22 @@ export default function Home() {
 
   // const [todos, setTodos] = useState([]);
   const [dropdownOpen, setdropdownOpen] = useState(false);
+  const [currentType, setCurrentType] = useState("sansserif");
+
+  const handleHeaderCurrentType = (type: string) => {
+    console;
+    if (type === "sansserif") {
+      return <span className={styles.main__sansserif}>Sans Serif</span>;
+    } else if (type === "serif") {
+      return <span className={styles.main__serif}>Serif</span>;
+    } else {
+      return <span className={styles.main__mono}>Mono</span>;
+    }
+  };
+
+  useEffect(() => {
+    console.log("current type: ", currentType);
+  }, [currentType]);
 
   return (
     <main className={styles.main}>
@@ -42,12 +60,30 @@ export default function Home() {
                 onClick={() => setdropdownOpen(!dropdownOpen)}
                 className={styles.header__type}
               >
-                <div className={styles.header__type__current}>Sans Serif</div>
+                <div className={styles.header__type__current}>
+                  {" "}
+                  {handleHeaderCurrentType(currentType)}
+                </div>
                 {dropdownOpen ? (
                   <ul className={styles.header__type__dropdown}>
-                    <li>Sans Serif</li>
-                    <li>Serif</li>
-                    <li>Mono</li>
+                    <li
+                      onClick={() => setCurrentType("sansserif")}
+                      className={styles.header__type__dropdown_sansserif}
+                    >
+                      Sans Serif
+                    </li>
+                    <li
+                      onClick={() => setCurrentType("serif")}
+                      className={styles.header__type__dropdown_serif}
+                    >
+                      Serif
+                    </li>
+                    <li
+                      onClick={() => setCurrentType("mono")}
+                      className={styles.header__type__dropdown_mono}
+                    >
+                      Mono
+                    </li>
                   </ul>
                 ) : (
                   ""
