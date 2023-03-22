@@ -1,4 +1,10 @@
 .container {
-  border: 1px solid red;
+  border: 1px solid black;
+}
 
+.header {
+  border: 1px solid black;
+  &__word {
+    border: 1px solid black;
+  }
 }

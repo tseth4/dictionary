@@ -44,8 +44,9 @@ export default function Home() {
   };
 
   const handleSearch = () => {
-    // console.log("handleSearch");
-    if (query.length > 1) {
+    console.log("handleSearch");
+    if (query.length > 0) {
+      console.log("fetching");
       setError(null);
       setLoading(true);
       fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${query}`)
@@ -60,11 +61,13 @@ export default function Home() {
           setLoading(false);
         })
         .catch((e) => setError(e.message));
+    } else {
+      setError("Empty Query")
     }
   };
-  // useEffect(() => {
-  //   console.log("err: ", typeof error);
-  // }, [error]);
+  useEffect(() => {
+    console.log("query: ", query);
+  }, [query]);
 
   return (
     <main className={styles.main}>
