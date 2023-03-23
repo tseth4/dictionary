@@ -1,10 +1,41 @@
 .container {
-  border: 1px solid black;
+  // border: 1px solid black;
+  &__word {
+    border: 1px solid black;
+  }
+  &__serif {
+    font-family: Lora;
+    font-weight: bold;
+  }
+  &__sansserif {
+    font-family: Inter;
+    font-weight: bold;
+  }
+  &__mono {
+    font-family: Inconsolata;
+    font-weight: bold;
+  }
 }
 
 .header {
-  border: 1px solid black;
+  // border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__play {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__play_phonetics_audio {
+    display: flex;
+    align-items: center;
+  }
   &__word {
-    border: 1px solid black;
+    color: black;
+    font-size: 32px;
+  }
+  &__word_phonetics_text {
+    color: black;
   }
 }

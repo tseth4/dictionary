@@ -12,7 +12,7 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   const inactiveTheme = activeTheme === "light" ? "dark" : "light";
 
@@ -62,7 +62,7 @@ export default function Home() {
         })
         .catch((e) => setError(e.message));
     } else {
-      setError("Empty Query")
+      setError("Empty Query");
     }
   };
   useEffect(() => {
