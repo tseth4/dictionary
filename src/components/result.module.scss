@@ -1,8 +1,9 @@
 .container {
   // border: 1px solid black;
-  &__word {
-    border: 1px solid black;
-  }
+  // &__word {
+  //   border: 1px solid black;
+  // }
+  color: var(--color-text-primary);
   &__serif {
     font-family: Lora;
     font-weight: bold;
@@ -32,10 +33,81 @@
     align-items: center;
   }
   &__word {
-    color: black;
+    // color: black;
     font-size: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
   &__word_phonetics_text {
     color: black;
+    font-family: Inter;
+    font-weight: regular;
+    color: var(--color-input-outline);
+  }
+}
+
+.body {
+  &__part_of_speech {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    font-style: italic;
+    margin-top: 29px;
+
+    // padding-right: 60px;
+    > span:first-of-type {
+      // border: 1px solid red;
+      margin-right: 16px;
+      font-size: 18px;
+    }
+    > span:nth-child(2) {
+      display: inline;
+      width: 100%;
+      border-top: 1px solid var(--color-seperator);
+      height: 1px;
+    }
+  }
+  &__meaning_title {
+    margin-top: 26px;
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--color-text-part-of-speech);
+  }
+  &__definitions_list {
+    margin-top: 27px;
+    margin-left: 13px;
+    list-style: none;
+    font-weight: normal;
+    li::before {
+      content: "\2022";
+      color: var(--color-list-bullet);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+    li {
+      margin-top: 13px;
+
+    }
+
+  }
+  &__synonym {
+    margin-top: 24px;
+    > div {
+      display: inline-block;
+    }
+    > div:nth-child(2) {
+      color: var(--color-input-outline);
+      margin-left: 26px;
+      font-size: 16px;
+    }
+    &__title {
+      // margin-top: 27px;
+      font-size: 16px;
+      color: var(--color-text-part-of-speech);
+      font-weight: normal;
+    }
   }
 }

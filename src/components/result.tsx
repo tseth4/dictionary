@@ -21,7 +21,7 @@ interface ProcessedData {
   meanings: any[];
   // for header
   phonetic: string;
-  phonetics: any[];
+  audio: string;
   sourceUrls: string[];
   word: "";
 }
@@ -44,19 +44,28 @@ export default function Result(props: ResultProps) {
     let tempData: any = {
       meanings: [],
       phonetic: "",
-      phonetics: [],
+      audio: "",
       sourceUrls: [],
       word: dataInput[0].word,
     };
     for (let i = 0; i < dataInput?.length; i++) {
       console.log("dataInput[i]: ", dataInput[i]);
-      if (dataInput[i].phonetic) {
-        tempData.phonetic = dataInput[i].phonetic;
-      }
+      // handle phonetic
+      // if (dataInput[i].phonetic && dataInput[i].phonetic.length > 0) {
+      //   tempData.phonetic = dataInput[i].phonetic;
+      // }
+      // handle phonetics
       if (dataInput[i].phonetics) {
         let phonetics = dataInput[i].phonetics;
         for (let k = 0; k < phonetics.length; k++) {
-          tempData.phonetics.push(phonetics[k]);
+          let phoneticObj = phonetics[k];
+          // tempData.phonetics.push(phonetics[k]);
+          if (phoneticObj.audio && phoneticObj.audio.length > 0) {
+            tempData.audio = phoneticObj.audio;
+          }
+          if (phoneticObj.text && phoneticObj.text.length > 0) {
+            tempData.phonetic = phoneticObj.text;
+          }
         }
       }
       if (dataInput[i].sourceUrls) {
@@ -117,6 +126,32 @@ export default function Result(props: ResultProps) {
             />
           </div>
         </div>
+      </div>
+      <div className={styles.body}>
+        {processedData?.meanings.map((meaning, id) => (
+          <div className={styles.body__meaning} key={id}>
+            <div className={`${typeClass} ${styles.body__part_of_speech}`}>
+              <span>{meaning?.partOfSpeech}</span>
+              <span></span>
+            </div>
+            <div className={`${typeClass}  ${styles.body__meaning_title}`}>
+              Meaning
+            </div>
+            <ul className={`${typeClass} ${styles.body__definitions_list}`}>
+              {meaning?.definitions.map((def: any, id: number) => (
+                <li className={styles.body__definition} key={id}>
+                  {def.definition}
+                </li>
+              ))}
+            </ul>
+            <div className={styles.body__synonym}>
+              <div className={`${typeClass} ${styles.body__synonym__title}`}>
+                Synonym
+              </div>
+              <div className={typeClass}>{meaning?.synonyms.join(", ")}</div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
