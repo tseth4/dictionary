@@ -16,6 +16,26 @@
     font-family: Inconsolata;
     font-weight: bold;
   }
+  &__source {
+    font-size: 15px;
+    font-weight: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    &_title {
+      font-size: 16px;
+      color: var(--color-text-part-of-speech);
+
+    }
+  }
+  &__divider {
+    display: block;
+    width: 100%;
+    border-top: 1px solid var(--color-seperator);
+    height: 1px;
+    margin-top: 32px;
+    margin-bottom: 24px;
+  }
 }
 
 .header {
@@ -89,9 +109,7 @@
     }
     li {
       margin-top: 13px;
-
     }
-
   }
   &__synonym {
     margin-top: 24px;

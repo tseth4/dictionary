@@ -45,7 +45,7 @@ export default function Result(props: ResultProps) {
       word: dataInput[0].word,
     };
     for (let i = 0; i < dataInput?.length; i++) {
-      console.log("dataInput[i]: ", dataInput[i]);
+      // console.log("dataInput[i]: ", dataInput[i]);
 
       if (dataInput[i].phonetics) {
         let phonetics = dataInput[i].phonetics;
@@ -62,7 +62,9 @@ export default function Result(props: ResultProps) {
       if (dataInput[i].sourceUrls) {
         let sourceUrls = dataInput[i].sourceUrls;
         for (let l = 0; l < sourceUrls.length; l++) {
-          tempData.sourceUrls.push(sourceUrls[l]);
+          if (tempData.sourceUrls.indexOf(sourceUrls[l]) === -1) {
+            tempData.sourceUrls.push(sourceUrls[l]);
+          }
         }
       }
       let meanings = dataInput[i].meanings;
@@ -139,6 +141,23 @@ export default function Result(props: ResultProps) {
               </div>
               <div className={typeClass}>{meaning?.synonyms.join(", ")}</div>
             </div>
+          </div>
+        ))}
+      </div>
+      <div className={styles.container__divider}></div>
+      <div className={`${typeClass} ${styles.container__source}`}>
+        <div className={styles.container__source_title}>Source</div>
+        {processedData?.sourceUrls.map((src, index) => (
+          <div key={index}>
+            {src}{" "}
+            <span>
+              <Image
+                src="/images/icon-new-window.svg"
+                height={12}
+                width={12}
+                alt="icon-new-window"
+              />
+            </span>
           </div>
         ))}
       </div>
