@@ -1,8 +1,5 @@
-// "use client";
-// import { useEffect, useState } from "react";
 import styles from "@/components/search.module.scss";
 import Image from "next/image";
-// import { useEffect } from "react";
 
 interface SearchBarProps {
   currentType: string;

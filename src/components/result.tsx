@@ -17,9 +17,7 @@ interface Meaning {
 }
 
 interface ProcessedData {
-  //  grouped by part of Speech with multiple defintions
   meanings: any[];
-  // for header
   phonetic: string;
   audio: string;
   sourceUrls: string[];
@@ -28,7 +26,6 @@ interface ProcessedData {
 
 export default function Result(props: ResultProps) {
   const { currentType, isLoading, data, error } = props;
-  // this will be populated with all sourceUrls from each element
 
   const [processedData, setProcessedData] = useState<ProcessedData | null>();
 
@@ -40,7 +37,6 @@ export default function Result(props: ResultProps) {
       : `${styles.container__mono}`;
 
   const processData = (dataInput: any[]) => {
-    // console.log("processData data: ", dataInput);
     let tempData: any = {
       meanings: [],
       phonetic: "",
@@ -50,16 +46,11 @@ export default function Result(props: ResultProps) {
     };
     for (let i = 0; i < dataInput?.length; i++) {
       console.log("dataInput[i]: ", dataInput[i]);
-      // handle phonetic
-      // if (dataInput[i].phonetic && dataInput[i].phonetic.length > 0) {
-      //   tempData.phonetic = dataInput[i].phonetic;
-      // }
-      // handle phonetics
+
       if (dataInput[i].phonetics) {
         let phonetics = dataInput[i].phonetics;
         for (let k = 0; k < phonetics.length; k++) {
           let phoneticObj = phonetics[k];
-          // tempData.phonetics.push(phonetics[k]);
           if (phoneticObj.audio && phoneticObj.audio.length > 0) {
             tempData.audio = phoneticObj.audio;
           }
@@ -76,7 +67,6 @@ export default function Result(props: ResultProps) {
       }
       let meanings = dataInput[i].meanings;
       for (let j = 0; j < meanings.length; j++) {
-        // console.log("meaining: ", meanings[j]);
         tempData.meanings.push(meanings[j]);
       }
     }
@@ -99,12 +89,11 @@ export default function Result(props: ResultProps) {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  // console.log("data: ", data);
+
   if (!data) {
     return <div> </div>;
   }
-  // const { meanings, phonetics, sourceUrls, word } = processedData;
-  // console.log("dat: ", { meanings, phonetics, sourceUrls, word });
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
